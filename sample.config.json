@@ -1,0 +1,34 @@
+{
+  "PoolCommissionRate": "0.25",
+  "Version": "0.0.2",
+  "DataStorageFilePath": "/data/pool-manager-api.db",
+  "APIConfig": {
+    "ServerPort": 8080,
+    "Region": "YOUR_REGION"
+  },
+  "PayoutLoopConfig": {
+    "RPCUrl": "https://YOUR_ARBITRUM_RPC_URL",
+    "PrivateKeyStorePath": "/etc/pool/key.json",
+    "PrivateKeyPassphrasePath": "/etc/pool/key-secret.txt",
+    "Region": "YOUR_REGION",
+    "PayoutFrequencySeconds": 14400,
+    "PayoutThreshold": "5000000000000000"
+  },
+  "PluginPath": "/app/app_plugins/sqlite_loader_plugin.so",
+  "PluginConfig": {
+    "db_path": "/data/pool-manager-api.db",
+    "fetch_interval_seconds": 500,
+    "region": "YOUR_REGION",
+    "pool_commission": 0.25,
+    "data_sources": [
+      {
+        "endpoint": "https://YOUR_POOL_AI_ORCHESTRATOR",
+        "nodeType": "ai"
+      },
+      {
+        "endpoint": "https://YOUR_POOL_TRANSCODE_ORCHESTRATOR",
+        "nodeType": "transcode"
+      }
+    ]
+  }
+}
