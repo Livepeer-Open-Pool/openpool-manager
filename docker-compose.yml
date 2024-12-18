@@ -1,0 +1,34 @@
+services:
+
+  open-pool-data-loader:
+    image: registry.livepeer.tools/open-pool-agent:v0.0.2
+    restart: unless-stopped
+    volumes:
+      - open-pool-api-data:/data
+      - open-pool-api-config:/etc/pool
+    command: ['/usr/local/bin/openpool-data-loader', '-config=/etc/pool/config.json']
+
+  open-pool-payout-loop:
+    image: registry.livepeer.tools/open-pool-agent:v0.0.2
+    restart: unless-stopped
+    volumes:
+      - open-pool-api-data:/data
+      - open-pool-api-config:/etc/pool
+    command: ['/usr/local/bin/openpool-payout-loop', '-config=/etc/pool/config.json']
+    depends_on:
+      - open-pool-data-loader
+
+  open-pool-api:
+    image: registry.livepeer.tools/open-pool-agent:v0.0.2
+    restart: unless-stopped
+    volumes:
+      - open-pool-api-data:/data
+      - open-pool-api-config:/etc/pool
+    command: ['/usr/local/bin/openpool-api', '-config=/etc/pool/config.json']
+    depends_on:
+      - open-pool-data-loader
+volumes:
+  open-pool-api-data:
+    external: true
+  open-pool-api-config:
+    external: true
