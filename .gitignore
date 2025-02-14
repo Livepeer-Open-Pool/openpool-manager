@@ -1,0 +1,6 @@
+.idea/
+.env
+.log
+*.db
+app_plugins/*.so
+config.json
