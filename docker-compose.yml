@@ -1,0 +1,15 @@
+services:
+
+  open-pool-manager:
+    image: registry.livepeer.tools/open-pool-manager:v0.0.4
+    restart: unless-stopped
+    volumes:
+      - pool-data:/var/lib/open-pool/data/
+      - pool-config:/etc/open-pool
+    command: ['/usr/local/bin/open-pool-manager', '-config=/etc/open-pool/config.json']
+
+volumes:
+  pool-data:
+    external: true
+  pool-config:
+    external: true
